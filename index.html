@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Quick Pick</title>
+	<h1>Welcome to the Mass Lottery "Lucky for Life" Game</h1>
+
+	<style type="text/css">
+		h1 {
+			text-align: center;
+			font-size: 30px;
+			color: #16516d;
+		}
+		body {
+			background-color: #d7e3ec;
+
+		}
+		div {
+			text-align: center;
+			display: block;
+			padding: 30px;
+		}
+
+		form {
+			border-style: solid;
+			border-color: #16516d;
+			border-width: 10px;
+			width: 500px;
+			padding: 20px;
+			display: inline-block;
+			text-align: center;
+			background-color: #bfb9b8;
+		}
+
+	</style>
+
+	<script language="javascript" type="text/javascript">
+		numbers = new Array;
+		for (i = 0; i < 5; i++) {
+			var a = Math.random() * 47 + 1;
+			a = Math.round(a);
+			numbers[i] = a;			
+		}
+
+		var randNumbers = " ";
+		randNumbers = "The random numbers are: ";
+		for (i = 0; i < 5; i++) {
+			randNumbers += numbers[i];
+			if (i != 4) {
+				randNumbers += ", ";
+			} else {
+				randNumbers += "\n";
+			}
+		}
+		document.write(randNumbers + "<br>");
+
+		var luckyNumber = " ";
+		luckyNumber = "The lucky ball number is: ";
+		var lucky = Math.random() * 17 + 1;
+		lucky = Math.round(lucky);
+		luckyNumber += lucky;
+		document.write(luckyNumber + "<br>" + "<br>");
+
+
+		var sortedNumbs = " ";
+		sortedNumbs = "After sorting, the random numbers are: ";
+		numbers.sort(function(a, b) {return a-b});
+		for (i = 0; i < 5; i++) {
+			sortedNumbs += numbers[i];
+			if (i != 4) {
+				sortedNumbs += ", ";
+			} else {
+				sortedNumbs += "\n";
+			}
+		}
+		document.write(sortedNumbs + "<br>");
+		document.write(luckyNumber + "<br>");
+
+	</script>
+
+</head>
+<body>
+	<div>
+		<form>
+			<br>
+			Enter your 5 numbers (from 1 to 48): <input type="text" id="txt1">
+			<br>
+			Enter your lucky ball number (1 to 18): <input type="text" id="txt2">
+			<br>
+			<input type="button" onclick="showVal()" value="Submit">
+		</form>
+	</div>
+	<script language="javascript" type="text/javascript">
+		inputs = new Array;
+		function showVal() {
+			val = document.getElementById("txt1").value;
+			luckyNum = document.getElementById("txt2").value;
+
+			inputs = val.split(" ");
+			inputs.sort(function(a, b) {return a-b});
+
+			var counter = 0;
+			var luckyball = 0;
+
+			for (i = 0; i < 5; i++) {
+				for (j = 0; j < 5; j++) {
+					if (inputs[i] == numbers[j]) {
+						counter++;
+						break;
+					}
+				}
+			}
+
+			if (luckyNum == lucky) {
+				luckyball++;
+			}
+
+			if(counter == 5) {
+				if (luckyball == 1) {
+					alert("Match of 5 and Lucky Ball!\nProbability is 1 in 30,821,472\nPrize is $7,000 a WEEK for LIFE!");
+				} else {
+					alert("Match of 5!\nProbability is 1 in 1,813,027\nPrize is $25,000 a YEAR for LIFE!");
+				}
+ 			} else if (counter == 4) {
+ 				if (luckyball == 1) {
+					alert("Match of 4 and Lucky Ball!\nProbability is 1 in 143,355\nPrize is $5,000!");
+				} else {
+					alert("Match of 4!\nProbability is 1 in 8,432\nPrize is $200");
+				}
+ 			} else if (counter == 3) {
+ 				if (luckyball == 1) {
+					alert("Match of 3 and Lucky Ball!\nProbability is 1 in 3,413\nPrize is $150!");
+				} else {
+					alert("Match of 3!\nProbability is 1 in 200\nPrize is $20!");
+				}
+ 			} else if (counter == 2) {
+ 				if (luckyball == 1) {
+					alert("Match of 2 and Lucky Ball!\nProbability is 1 in 249\nPrize is $25!");
+				} else {
+					alert("Match of 2!\nProbability is 1 in 14\nPrize is $3!");
+				}
+ 			} else if (counter == 1 && luckyball == 1) {
+ 				alert("Match of 1 and Lucky Ball!\nProbability is 1 in 49\nPrize is $6!");
+ 			} else if (luckyball == 1) {
+ 				alert("Match of Lucky Ball!\nProbability is 1 in 32\nPrize is $4!");
+ 			} else {
+ 				alert("Match of one or less\nNo prize.");
+ 			}
+		}
+	</script>
+</body>
+</html>
